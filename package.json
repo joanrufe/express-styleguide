@@ -4,11 +4,11 @@
   "description": "TUI Belgium Styleguide",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/server.js",
+    "start": "nodemon ./src/server.js", 
     "server": "node ./src/server.js",
-    "client": "webpack-dev-server --mode=development --config=webpack.config.js",
-    "build": "rimraf dist && webpack --mode=development --config=webpack.config.js",
-    "build:prod": "rimraf dist && webpack --mode=production --config=webpack.config.js"
+    "client": "webpack-dev-server --env.development --config=webpack.config.js",
+    "build": "rimraf dist && webpack --env.development --config=webpack.config.js",
+    "build:prod": "rimraf dist && webpack --env.production --config=webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +17,11 @@
     "ejs": "^2.6.1",
     "ejs-webpack-loader": "^2.2.2",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
     "nodemon": "^1.17.5",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
