@@ -1,0 +1,6 @@
+{
+    "status": "enabled",
+    "name": "my_input",
+    "label": "My Input",
+    "value": "Write here..."
+}

@@ -1,0 +1,6 @@
+<% if (label) { %>
+    <div class="form-item textinput<%= ' '+ status %>">
+        <label for="<%= label %>"><%= label %></label>
+        <input type="text" name="<%= name %>" value="<%= value %>" />
+    </div>
+<% } %>
