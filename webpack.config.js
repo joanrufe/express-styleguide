@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const path = require('path');
 
 module.exports = {
-	entry: './src/main.js',
+	entry: './src/client.js',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'module.bundle.js'
@@ -28,7 +28,10 @@ module.exports = {
 			{ test: /\.css$/, use: 'css-loader' },
 		]
 	},
-	devtool: 'source-map'
+	devtool: 'source-map',
+	node: {
+		fs: 'empty'
+	}
 }
 
 /**

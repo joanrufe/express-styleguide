@@ -6,14 +6,10 @@ import {render} from 'ejs'
  * @param {Object} options 
  * @param {Element} elem 
  */
-export default function(templatePath, options, elem) {
-    debugger
-    return import(`../templates/${templatePath}.ejs`)
-        .then(function(ejsString) {
-            debugger
-            const res = render(ejsString.default(options)).trim()
-            debugger
-            if (!elem) return res
-            elem.innerHTML = res
-        })
+export default function(templatePath, options) {
+    const tpl = require(`../templates/${templatePath}.ejs`)
+    const json = require(`../templates/${templatePath}.json`)
+    if(!tpl) return;
+    if(!options) return tpl(json)
+    return tpl(options)
 }
