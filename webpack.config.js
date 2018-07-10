@@ -4,7 +4,10 @@ const path = require('path');
 
 module.exports = function(env) {
 	return {
-		entry: ['./src/client.js', './src/styles/index.scss' ], 
+		entry: [
+			'./src/client.js', 
+			'./src/styles/index.scss' 
+		], 
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: 'module.bundle.js'
@@ -17,6 +20,7 @@ module.exports = function(env) {
 				chunkFilename: '[id].css',
 			}),
 			new HtmlWebpackPlugin({ template: './src/index.html' }),
+			require('autoprefixer')
 		],
 		module: {
 			rules: [
@@ -37,6 +41,7 @@ module.exports = function(env) {
 					use: [
 					!env.production ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
+					"postcss-loader",
 					'sass-loader',
 					],
 				}

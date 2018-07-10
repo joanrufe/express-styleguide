@@ -1,1 +1,1 @@
-{"version":3,"sources":["webpack:///./src/styles/index.scss"],"names":[],"mappings":"AAAA;AACA,eAAe","file":"main.css","sourcesContent":["body {\n  margin: 20px; }\n"],"sourceRoot":""}
+{"version":3,"sources":["webpack:///./src/styles/index.scss (1)"],"names":[],"mappings":";AAAA,EAAE,8BAA8B,KAAK,Y","file":"main.css","sourcesContent":["*{font-family:Roboto,sans-serif}body{margin:20px}"],"sourceRoot":""}
