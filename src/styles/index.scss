@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+@import 'form';
+/**
+* We can use CSSNEXT features like:
+*
+
+:root {
+    --danger-theme: {
+      color: white;
+      background-color: red;
+    }
+}
+
+#app{
+    @apply --danger-theme;
+}
+
+// */
+
+
 *{
     font-family: 'Roboto', sans-serif;
 }

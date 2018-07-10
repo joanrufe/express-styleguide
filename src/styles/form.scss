@@ -1,0 +1,11 @@
+.form-item{
+    padding: 5px 10px;
+    &.textinput{
+        display: flex;
+        flex-flow: column wrap;
+
+        label{
+            padding-bottom: 10px;
+        }
+    }
+}

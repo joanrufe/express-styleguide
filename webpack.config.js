@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
+const webpack = require('webpack')
 
 module.exports = function(env) {
 	return {
@@ -14,17 +15,20 @@ module.exports = function(env) {
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
-				// Options similar to the same options in webpackOptions.output
-				// both options are optional
 				filename: '[name].css',
 				chunkFilename: '[id].css',
 			}),
 			new HtmlWebpackPlugin({ template: './src/index.html' }),
-			require('autoprefixer')
+			require('autoprefixer'),
+
+			// Define here global variables for JavaScript
+			new webpack.DefinePlugin({
+				PRODUCTION:  env.production? JSON.stringify(true) : JSON.stringify(false),
+			})
 		],
 		module: {
 			rules: [
-				{
+				{ // @TODO: correctly implement ejs loader to provide templates directly so that doesn't need to be imported
 					test: /\.ejs$/,
 					use: [
 						{
@@ -44,6 +48,13 @@ module.exports = function(env) {
 					"postcss-loader",
 					'sass-loader',
 					],
+				},
+				{
+					test: /\.js$/,
+					exclude: /(node_modules|bower_components)/,
+					use: {
+					  loader: 'babel-loader'
+					}
 				}
 			]
 		},

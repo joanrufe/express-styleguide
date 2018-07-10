@@ -1,6 +1,6 @@
 module.exports = {
     plugins: {
-      'postcss-cssnext': {},
-      'cssnano': {} // minify
+        'postcss-cssnext': {},
+        'cssnano': {}, // minify
     }
   }

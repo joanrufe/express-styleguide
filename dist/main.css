@@ -1,4 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
-*{font-family:Roboto,sans-serif}body{margin:20px}
+.form-item{padding:5px 10px}.form-item.textinput{-ms-flex-flow:column wrap;-webkit-box-direction:normal;-webkit-box-orient:vertical;display:-webkit-box;display:-ms-flexbox;display:flex;flex-flow:column wrap}.form-item.textinput label{padding-bottom:10px}*{font-family:Roboto,sans-serif}body{margin:20px}
 
 /*# sourceMappingURL=main.css.map*/

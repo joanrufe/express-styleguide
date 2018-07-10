@@ -4,7 +4,7 @@ import {render} from 'ejs'
  * Attach ejs.render results to Element
  * @param {String} templatePath 
  * @param {Object} options 
- * @param {Element} elem 
+ * @returns {String} Rendered template
  */
 export default function(templatePath, options) {
     const tpl = require(`../templates/${templatePath}.ejs`)

@@ -1,8 +1,8 @@
 import {renderer} from './modules'
-import './styles/index.scss'
 
 const app = document.getElementById('app')
 
+console.log(PRODUCTION? 'Is prod env': 'Is dev env')
 
 const res = renderer('atoms/text-input')
 app.innerHTML = res
