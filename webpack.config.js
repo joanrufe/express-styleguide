@@ -58,6 +58,7 @@ module.exports = function(env) {
 				}
 			]
 		},
+		// devtool: 'inline-source-map',
 		devtool: 'source-map',
 		node: {
 			fs: 'empty'
