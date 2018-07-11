@@ -9,6 +9,7 @@ const page = {
     defaults: pageDefaults
 }
 
+// ------- Add here new pages from imported components -------- //
 const all = [
     ...atoms,
     ...molecules,
@@ -19,6 +20,8 @@ const pages = {
     atoms,
     molecules
 }
+// ------------------------------------------------------- //
+
 const pagesNames = Object.keys(pages)
 
 const templates = {

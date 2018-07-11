@@ -13,6 +13,9 @@ module.exports = function(env) {
 			path: path.resolve(__dirname, 'dist'),
 			filename: 'module.bundle.js'
 		},
+		devServer: {
+	       	hot: true
+		},
 		plugins: [
 			new MiniCssExtractPlugin({
 				filename: '[name].css',
@@ -24,7 +27,8 @@ module.exports = function(env) {
 			// Define here global variables for JavaScript
 			new webpack.DefinePlugin({
 				PRODUCTION:  env.production? JSON.stringify(true) : JSON.stringify(false),
-			})
+			}),
+			new webpack.HotModuleReplacementPlugin()
 		],
 		module: {
 			rules: [
@@ -59,7 +63,7 @@ module.exports = function(env) {
 			]
 		},
 		// devtool: 'inline-source-map',
-		devtool: 'source-map',
+		// devtool: 'source-map',
 		node: {
 			fs: 'empty'
 		}
