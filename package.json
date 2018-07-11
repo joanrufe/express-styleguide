@@ -1,14 +1,15 @@
 {
-  "name": "tui-styleguide",
+  "name": "styleguide",
   "version": "0.0.1",
-  "description": "TUI Belgium Styleguide",
+  "description": "My custom Styleguide",
   "main": "index.js",
   "scripts": {
-    "server-dev": "nodemon ./src/server.js",
-    "server": "node ./src/server.js",
+    "server-dev": "nodemon ./server.js",
+    "server": "node ./server.js",
     "client": "webpack-dev-server --env.development --config=webpack.config.js",
-    "build": "rimraf dist && webpack --env.development --config=webpack.config.js",
-    "build:prod": "rimraf dist && webpack --env.production --config=webpack.config.js"
+    "build": "rimraf dist/styleguide/ && webpack --env.development --config=webpack.config.js && npm run build:plugin",
+    "build:prod": "rimraf dist/styleguide/ && webpack --env.production --config=webpack.config.js && npm run build:plugin",
+    "build:plugin": "rimraf dist/plugin/ && webpack --env.production ./src/plugin.js -o dist/plugin/jquery.styleguide.js"
   },
   "author": "",
   "license": "ISC",

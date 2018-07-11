@@ -1,14 +1,20 @@
-import {renderer, router} from './modules'
+import {router} from './modules'
 import templates from './templates'
 import './styles/index.scss'
 
 export default function (){
     const app = document.getElementById('app')
-
-    const basicTemplate = children => app.innerHTML = templates.getByPath('page').render({
-        pages: templates.getPageNames(),
-        children: children
-    })
+    /**
+     * Render with page template
+     * @param {string} children HTML string to render
+     * @param {Element} elem HTML element from query
+     */
+    function renderPage(children){ 
+        app.innerHTML = templates.getByPath('page').render({
+            pages: templates.getPageNames(),
+            children: children
+        })
+    }
 
     // Page with all the components
     router
@@ -16,9 +22,9 @@ export default function (){
         const foundTemplates = templates.getByPath(params.page)
         if(foundTemplates){
             const rendered = foundTemplates.map(tpl => tpl.render(tpl.defaults)).join('<br><br>')
-            basicTemplate(rendered)
+            renderPage(rendered)
         }else{
-            return basicTemplate('Not Found!')
+            renderPage('Not Found!')
         }
     })
     .resolve();
@@ -30,13 +36,13 @@ export default function (){
 
         const renderedComponent = componentTemplate()
 
-        app.innerHTML = basicTemplate(renderedComponent)
+        renderPage(renderedComponent)
     })
 
     // Home Route
     router
     .on(function () {
-        app.innerHTML = basicTemplate("Frontpage!")
+        renderPage("Frontpage!")
     })
     .resolve();
 

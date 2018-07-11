@@ -10,7 +10,7 @@ module.exports = function(env) {
 			'./src/styles/index.scss' 
 		], 
 		output: {
-			path: path.resolve(__dirname, 'dist'),
+			path: path.resolve(__dirname, 'dist/styleguide/'),
 			filename: 'module.bundle.js'
 		},
 		devServer: {
