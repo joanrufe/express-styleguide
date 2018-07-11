@@ -6,8 +6,8 @@ const webpack = require('webpack')
 module.exports = function(env) {
 	return {
 		entry: [
-			'./src/client.js', 
-			'./src/styles/index.scss' 
+			'./src/client/client.js', 
+			'./src/common/styles/index.scss' 
 		], 
 		output: {
 			path: path.resolve(__dirname, 'dist/styleguide/'),
@@ -21,7 +21,7 @@ module.exports = function(env) {
 				filename: '[name].css',
 				chunkFilename: '[id].css',
 			}),
-			new HtmlWebpackPlugin({ template: './src/index.html' }),
+			new HtmlWebpackPlugin({ template: './src/common/index.html' }),
 			require('autoprefixer'),
 
 			// Define here global variables for JavaScript

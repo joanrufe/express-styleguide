@@ -1,6 +1,6 @@
 import {router} from './modules'
-import templates from './templates'
-import './styles/index.scss'
+import templates from '../common/templates'
+import '../common/styles/index.scss'
 
 export default function (){
     const app = document.getElementById('app')

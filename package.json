@@ -4,8 +4,8 @@
   "description": "My custom Styleguide",
   "main": "index.js",
   "scripts": {
-    "server-dev": "nodemon ./server.js",
-    "server": "node ./server.js",
+    "server-dev": "nodemon ./src/server/server.js",
+    "server": "node ./src/server/server.js",
     "client": "webpack-dev-server --env.development --config=webpack.config.js",
     "build": "rimraf dist/styleguide/ && webpack --env.development --config=webpack.config.js && npm run build:plugin",
     "build:prod": "rimraf dist/styleguide/ && webpack --env.production --config=webpack.config.js && npm run build:plugin",
