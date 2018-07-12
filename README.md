@@ -32,5 +32,5 @@ If any of the options are not defined it will use defaults.
 ## TODO ##
 - Server side rendering Service
 - Optimise production builds
-- Change develoment settings for a better dev workflow
+- Adapt scripts and webpack config for a better dev workflow
 - Dinamically fetch styles when using jQuery Plugin
