@@ -7,9 +7,9 @@
     "server-dev": "nodemon ./src/server/server.js",
     "server": "node ./src/server/server.js",
     "client": "webpack-dev-server --env.development --config=webpack.config.js",
-    "build": "rimraf dist/styleguide/ && webpack --env.development --config=webpack.config.js && npm run build:plugin",
-    "build:prod": "rimraf dist/styleguide/ && webpack --env.production --config=webpack.config.js && npm run build:plugin",
-    "build:plugin": "rimraf dist/plugin/ && webpack --env.production ./src/plugin.js -o dist/plugin/jquery.styleguide.js"
+    "build": "rimraf dist/styleguide/ && webpack --env.development --config=webpack.config.js",
+    "build:prod": "rimraf dist/styleguide/ && webpack --env.production --config=webpack.config.js",
+    "build:plugin": "rimraf dist/plugin/ && webpack --env.production --config=webpack.config.js"
   },
   "author": "",
   "license": "ISC",
