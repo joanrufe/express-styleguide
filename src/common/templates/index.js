@@ -43,7 +43,7 @@ const templates = {
 
         // search for component
         const componentFound = all.filter(elem => elem.name == component).shift();
-        return componentFound ? componentFound : []
+        return componentFound ? componentFound : undefined
     }
 }
 

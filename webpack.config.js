@@ -67,6 +67,9 @@ module.exports = function(env) {
 		},
 		// devtool: 'inline-source-map',
 		// devtool: 'source-map'
+		node:{
+			fs: 'empty'
+		}
 	}, {
 		entry: './src/plugin.js',
 		output: {
@@ -86,10 +89,32 @@ module.exports = function(env) {
 					use: [{
 						loader: "ejs-webpack-loader",
 						options: {
-							data: {
-								title: "New Title",
-								someVar: "hello world"
-							},
+							htmlmin: true
+						}
+					}]
+				}
+			]
+		}
+	},{
+		entry: './src/server/render-service.js',
+		target: 'node',
+		output: {
+			path: path.resolve(__dirname, 'dist/render-service'),
+			filename: 'render-service.js'
+		},
+		module: {
+			rules: [{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: 'babel-loader'
+					}
+				},
+				{
+					test: /\.ejs$/,
+					use: [{
+						loader: "ejs-webpack-loader",
+						options: {
 							htmlmin: true
 						}
 					}]

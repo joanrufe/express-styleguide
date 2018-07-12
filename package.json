@@ -4,12 +4,11 @@
   "description": "My custom Styleguide",
   "main": "index.js",
   "scripts": {
-    "server-dev": "nodemon ./src/server/server.js",
+    "develop": "webpack-dev-server --content-base='dist/styleguide' --env.development --config=webpack.config.js",
+    "build": "rimraf ./dist/ && webpack --env.development --config=webpack.config.js",
+    "build:prod": "rimraf ./dist/ && webpack --env.production --config=webpack.config.js",
     "server": "node ./src/server/server.js",
-    "client": "webpack-dev-server --env.development --config=webpack.config.js",
-    "build": "rimraf dist/styleguide/ && webpack --env.development --config=webpack.config.js",
-    "build:prod": "rimraf dist/styleguide/ && webpack --env.production --config=webpack.config.js",
-    "build:plugin": "rimraf dist/plugin/ && webpack --env.production --config=webpack.config.js"
+    "render-service": "node ./dist/render-service/render-service.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +25,6 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.2",
-    "nodemon": "^1.17.5",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.3",
