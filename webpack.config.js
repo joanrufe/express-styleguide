@@ -3,8 +3,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = function(env) {
-	return [{
+module.exports = function (env) {
+	const client = {
 		entry: [
 			'./src/client/client.js',
 			'./src/common/styles/index.scss',
@@ -26,13 +26,12 @@ module.exports = function(env) {
 			// Define here global variables for JavaScript usage
 			new webpack.DefinePlugin({
 				PRODUCTION: env.production ? JSON.stringify(true) : JSON.stringify(false),
-			}),
-			!env.production ?
-				new webpack.HotModuleReplacementPlugin() :
-				new MiniCssExtractPlugin({
-					filename: '[name].css',
-					chunkFilename: '[id].css',
-				})
+			}), !env.production ?
+			new webpack.HotModuleReplacementPlugin() :
+			new MiniCssExtractPlugin({
+				filename: '[name].css',
+				chunkFilename: '[id].css',
+			})
 		],
 		module: {
 			rules: [{
@@ -50,8 +49,7 @@ module.exports = function(env) {
 				},
 				{
 					test: /\.(sa|sc|c)ss$/,
-					use: [
-						!env.production ? 'style-loader' : MiniCssExtractPlugin.loader,
+					use: [!env.production ? 'style-loader' : MiniCssExtractPlugin.loader,
 						'css-loader',
 						"postcss-loader",
 						'sass-loader',
@@ -68,10 +66,12 @@ module.exports = function(env) {
 		},
 		// devtool: 'inline-source-map',
 		// devtool: 'source-map'
-		node:{
+		node: {
 			fs: 'empty'
 		}
-	}, {
+	}
+
+	const plugin = {
 		entry: [
 			"babel-polyfill", // Attach polyfills for older browsers
 			'./src/plugin.js'
@@ -99,7 +99,9 @@ module.exports = function(env) {
 				}
 			]
 		}
-	},{
+	}
+
+	const renderService = {
 		entry: [
 			"babel-polyfill", 
 			'./src/server/render-service.js'
@@ -128,5 +130,36 @@ module.exports = function(env) {
 				}
 			]
 		}
-	}]
+	}
+	const server = {
+		entry: [
+			"babel-polyfill", 
+			'./src/server/server.js'
+		],
+		target: 'node',
+		output: {
+			path: path.resolve(__dirname, 'dist/server'),
+			filename: 'server.js'
+		},
+		module: {
+			rules: [{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: 'babel-loader'
+					}
+				},
+				{
+					test: /\.ejs$/,
+					use: [{
+						loader: "ejs-webpack-loader",
+						options: {
+							htmlmin: true
+						}
+					}]
+				}
+			]
+		}
+	}
+	return [ client, server, renderService, plugin ]
 }

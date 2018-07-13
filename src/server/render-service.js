@@ -1,31 +1,31 @@
-var express = require('express');
-var app = express();
-var templates = require('../common/templates').default;
+import express from 'express'
+const app = express()
+import templates from '../common/templates'
 
-app.use(express.static('dist/render-service/'));
+app.use(express.static('dist/render-service/'))
 
 app.get('/', function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send({ ready: true });
-});
+  res.setHeader('Content-Type', 'application/json')
+  res.send({ ready: true })
+})
 
 
 // GET -> render with default parameters
 app.get('/render/:page/:component', function (req, res) {
-  var {page, component} = req.params;
-  var tpl = templates.getByPath(`${page}/${component}`);
+  const {page, component} = req.params
+  const tpl = templates.getByPath(`${page}/${component}`)
   if (!tpl || tpl.length == 0) {
-    res.status(404).send('Not found');
-    return;
+    res.status(404).send('Not found')
+    return
   }
   
-  var html = tpl.render(tpl.defaults)
-  res.setHeader('Content-Type', 'application/json');
+  const html = tpl.render(tpl.defaults)
+  res.setHeader('Content-Type', 'application/json')
   res.send({
       data: html,
       status: 'ok'
-  });
-});
+  })
+})
 
 //@TODO render with POST parameters 
 
