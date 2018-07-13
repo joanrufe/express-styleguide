@@ -1,13 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 module.exports = function(env) {
 	return [{
 		entry: [
 			'./src/client/client.js',
-			'./src/common/styles/index.scss'
+			'./src/common/styles/index.scss',
+			"babel-polyfill" // Attach polyfills for older browsers
 		],
 		output: {
 			path: path.resolve(__dirname, 'dist/styleguide/'),
@@ -71,7 +72,10 @@ module.exports = function(env) {
 			fs: 'empty'
 		}
 	}, {
-		entry: './src/plugin.js',
+		entry: [
+			"babel-polyfill", // Attach polyfills for older browsers
+			'./src/plugin.js'
+		],
 		output: {
 			path: path.resolve(__dirname, 'dist/plugin'),
 			filename: 'jquery.styleguide.js'
@@ -96,7 +100,10 @@ module.exports = function(env) {
 			]
 		}
 	},{
-		entry: './src/server/render-service.js',
+		entry: [
+			"babel-polyfill", // May not be needed for the render service...
+			'./src/server/render-service.js'
+		],
 		target: 'node',
 		output: {
 			path: path.resolve(__dirname, 'dist/render-service'),

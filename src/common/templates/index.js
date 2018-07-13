@@ -2,6 +2,7 @@ import atoms from './atoms';
 import molecules from './molecules';
 import pageTemplate from './page.ejs'
 import pageDefaults from './page.json'
+import 'babel-polyfill'; // Support for older browsers
 
 const page = {
     name: 'page',
