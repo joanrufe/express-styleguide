@@ -71,6 +71,9 @@ const pages = {
 // ------------------------------------------------------- //
 ```
 
+With this features you'll ends up with following delivery workflow
+![Delivery Workflow](./delivery-workflow.png)
+
 ## TODO ##
 - Complete server side rendering Service
 - Optimise production builds

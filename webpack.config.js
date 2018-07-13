@@ -101,7 +101,7 @@ module.exports = function(env) {
 		}
 	},{
 		entry: [
-			"babel-polyfill", // May not be needed for the render service...
+			"babel-polyfill", 
 			'./src/server/render-service.js'
 		],
 		target: 'node',
