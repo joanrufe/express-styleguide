@@ -4,6 +4,7 @@
   "description": "My custom Styleguide",
   "main": "index.js",
   "scripts": {
+    "now-start": "npm run build:prod && node ./src/server/server.js",
     "develop": "webpack-dev-server --content-base='dist/styleguide' --env.development --config=webpack.config.js",
     "build": "rimraf ./dist/ && webpack --env.development --config=webpack.config.js",
     "build:prod": "rimraf ./dist/ && webpack --env.production --config=webpack.config.js",
