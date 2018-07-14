@@ -56,7 +56,7 @@ router.hooks({
 })
 
 export default function (){
-    // take route from hash on page refresh
+    // take route from hash on page reload
     if(location.hash) router.navigate(location.hash.replace('#','/'))
     router.updatePageLinks()
 }

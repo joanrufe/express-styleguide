@@ -1,9 +1,10 @@
 import app from './app'
-//@TODO: Modify hot-realoading so that we don't loose current state
 
-// App Element container
+// Hot Module Replacement
 if (module.hot) {
-    module.hot.accept('./app', app);
+    module.hot.accept('./app', function(){
+        app()
+    });
 }
 
 app()
