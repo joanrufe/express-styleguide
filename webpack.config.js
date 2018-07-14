@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 const webpack = require('webpack');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = function (env) {
 	const client = {
@@ -14,8 +15,11 @@ module.exports = function (env) {
 			path: path.resolve(__dirname, 'dist/styleguide/'),
 			filename: 'module.bundle.js'
 		},
+		watch: true,
 		devServer: {
-			hot: true
+			hot: true,
+			contentBase: path.resolve(__dirname, 'dist/styleguide/'),
+			publicPath: '/'
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
@@ -24,28 +28,15 @@ module.exports = function (env) {
 			require('autoprefixer'),
 
 			// Define here global variables for JavaScript usage
-			new webpack.DefinePlugin({
-				PRODUCTION: env.production ? JSON.stringify(true) : JSON.stringify(false),
-			}), !env.production ?
-			new webpack.HotModuleReplacementPlugin() :
-			new MiniCssExtractPlugin({
-				filename: '[name].css',
-				chunkFilename: '[id].css',
-			})
+			new webpack.HotModuleReplacementPlugin(),
+			new webpack.NamedModulesPlugin()
 		],
 		module: {
 			rules: [{
 					test: /\.ejs$/,
-					use: [{
-						loader: "ejs-webpack-loader",
-						options: {
-							data: {
-								title: "New Title",
-								someVar: "hello world"
-							},
-							htmlmin: true
-						}
-					}]
+					use: {
+						loader: "ejs-webpack-loader"
+					}
 				},
 				{
 					test: /\.(sa|sc|c)ss$/,
@@ -161,5 +152,6 @@ module.exports = function (env) {
 			]
 		}
 	}
-	return [ client, server, renderService, plugin ]
+	if(env.devServer) return client;
+	return [ client, server, renderService, plugin ];
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "now-start": "npm run build:prod && node ./dist/server/server.js",
-    "develop": "webpack-dev-server --content-base='dist/styleguide' --env.development --mode=development --config=webpack.config.js",
+    "develop": "webpack-dev-server --env.development --env.devServer --mode=development --config=webpack.config.js",
     "build": "rimraf ./dist/ && webpack --env.development --mode=development --config=webpack.config.js",
     "build:prod": "rimraf ./dist/ && webpack --env.production --mode=production --config=webpack.config.js",
     "server": "node ./dist/server/server.js",
