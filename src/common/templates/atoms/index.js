@@ -1,12 +1,7 @@
-import textInputRender from './text-input.ejs'
-import textInputDefaults from './text-input.json'
+import textInput from './text-input.js'
 
 const atoms = [
-  {
-    name: 'text-input',
-    render: textInputRender,
-    defaults: textInputDefaults
-  }
+  textInput
 ].map(elem => ({page: 'atoms', ...elem}))
 
 export default atoms

@@ -1,31 +1,23 @@
 import atoms from './atoms';
 import molecules from './molecules';
-import pageTemplate from './page.ejs'
-import pageDefaults from './page.json'
+import page from './page.js'
 import 'babel-polyfill'; // Support for older browsers
-
-const page = {
-    name: 'page',
-    render: pageTemplate,
-    defaults: pageDefaults
-}
 
 // ------- Add here new pages from imported components -------- //
 const all = [
+    page,
     ...atoms,
     ...molecules,
-    page
 ]
+// ------------------------------------------------------------//
 
-const pages = {
-    atoms,
-    molecules
-}
-// ------------------------------------------------------- //
+// Get all page names from the list of components
+const pagesNames = all.reduce(function(prev, curr, index, array){
+    if(prev.indexOf(curr.page)>= 0) return;
+    return prev.concat([curr.page])
+}, []).filter(Boolean)
 
-const pagesNames = Object.keys(pages)
-
-const templates = {
+export default {
     getAll: () => all,
     getPageNames: () => pagesNames,
     getByPath: (str = '') => {
@@ -47,5 +39,3 @@ const templates = {
         return componentFound ? componentFound : undefined
     }
 }
-
-export default templates

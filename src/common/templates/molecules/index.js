@@ -1,12 +1,7 @@
-import formRender from './form.ejs'
-import formDefaults from './form.json'
+import form from './form.js'
 
 const molecules = [
-  {
-    name: 'form',
-    render: formRender,
-    defaults: formDefaults
-  }
+  form
 ].map(elem => ({page: 'molecules', ...elem}))
 
 export default molecules
