@@ -39,5 +39,10 @@
     "express": "^4.16.3",
     "navigo": "^7.1.2",
     "now": "^11.2.9"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "IE 10"
+  ]
 }

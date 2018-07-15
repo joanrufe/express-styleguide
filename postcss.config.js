@@ -3,4 +3,4 @@ module.exports = {
         'postcss-cssnext': {},
         'cssnano': {}, // minify
     }
-  }
+}

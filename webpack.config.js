@@ -15,21 +15,32 @@ module.exports = function (env) {
 			path: path.resolve(__dirname, 'dist/styleguide/'),
 			filename: 'module.bundle.js'
 		},
-		watch: true,
-		devServer: {
+		
+		// Development settings
+		watch: !env.production? true : false,
+		devServer: !env.production? {
 			hot: true,
 			contentBase: path.resolve(__dirname, 'dist/styleguide/'),
 			publicPath: '/'
-		},
+		}: {},
+
 		plugins: [
 			new HtmlWebpackPlugin({
 				template: './src/common/index.html'
 			}),
-			require('autoprefixer'),
+			new MiniCssExtractPlugin({ 
+				filename: '[name].css', 
+				chunkFilename: '[id].css', 
+			}),
 
-			// Define here global variables for JavaScript usage
-			new webpack.HotModuleReplacementPlugin(),
-			new webpack.NamedModulesPlugin()
+			// Define here global variables for usage in js runtime
+			new webpack.DefinePlugin({
+        PRODUCTION: env.production ? JSON.stringify(true) : JSON.stringify(false),
+			}),
+
+			// More development settings
+			...(!env.production? [new webpack.HotModuleReplacementPlugin(),
+			new webpack.NamedModulesPlugin()] : [])
 		],
 		module: {
 			rules: [{
@@ -40,7 +51,8 @@ module.exports = function (env) {
 				},
 				{
 					test: /\.(sa|sc|c)ss$/,
-					use: [!env.production ? 'style-loader' : MiniCssExtractPlugin.loader,
+					use: [
+						...(!env.production ? ['style-loader'] : []),
 						'css-loader',
 						"postcss-loader",
 						'sass-loader',
@@ -143,15 +155,18 @@ module.exports = function (env) {
 				{
 					test: /\.ejs$/,
 					use: [{
-						loader: "ejs-webpack-loader",
-						options: {
-							htmlmin: true
-						}
+						loader: "ejs-webpack-loader"
 					}]
 				}
 			]
-		}
+		},
+		plugins:[
+			new HtmlWebpackPlugin({
+				template: './src/common/index.html'
+			}),
+		]
 	}
+
 	if(env.devServer) return client;
 	return [ client, server, renderService, plugin ];
 }
