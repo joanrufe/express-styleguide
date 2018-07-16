@@ -38,8 +38,10 @@ module.exports = function (env) {
 			}),
 
 			// More development settings
-			...(!env.production? [new webpack.HotModuleReplacementPlugin(),
-			new webpack.NamedModulesPlugin()] : [])
+			...(env.production? [] : [
+				new webpack.HotModuleReplacementPlugin(),
+				new webpack.NamedModulesPlugin()
+			])
 		],
 		module: {
 			rules: [{
@@ -51,7 +53,7 @@ module.exports = function (env) {
 				{
 					test: /\.(sa|sc|c)ss$/,
 					use: [
-						...(!env.production ? ['style-loader'] : []),
+						...(env.production ? [MiniCssExtractPlugin.loader] : ['style-loader']),
 						'css-loader',
 						"postcss-loader",
 						'sass-loader',
@@ -68,6 +70,7 @@ module.exports = function (env) {
 		},
 		// devtool: 'inline-source-map',
 		devtool: 'source-map',
+		// devtool: 'eval-source-map',
 		node: {
 			fs: 'empty'
 		}

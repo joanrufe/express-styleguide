@@ -1,5 +1,5 @@
 import {router} from './modules'
-import templates from '../common/templates'
+import styleguideProvider from '../common/styleguideProvider'
 import '../common/styles/index.scss'
 
 const app = document.getElementById('app')
@@ -9,8 +9,8 @@ const app = document.getElementById('app')
  * @param {Element} elem HTML element from query
  */
 function renderPage(children){ 
-    app.innerHTML = templates.getByPath('page').render({
-        pages: templates.getPageNames(),
+    app.innerHTML = styleguideProvider.getByPath('page').render({
+        pages: styleguideProvider.getPageNames(),
         children: children
     })
 }
@@ -18,7 +18,7 @@ function renderPage(children){
 // Page with all the components
 router
 .on('/:page/', function (params) {
-    const foundTemplates = templates.getByPath(params.page)
+    const foundTemplates = styleguideProvider.getByPath(params.page)
     if(foundTemplates){
         const rendered = foundTemplates.map(tpl => tpl.render(tpl.defaults)).join('<br><br>')
         renderPage(rendered)
@@ -31,7 +31,7 @@ router
 // Component page (Check if it's working)
 router
 .on('/:page/:component',function(params){
-    const componentTemplate = templates.getByPath(`${params.page}/${params.component}`)
+    const componentTemplate = styleguideProvider.getByPath(`${params.page}/${params.component}`)
 
     const renderedComponent = componentTemplate()
 

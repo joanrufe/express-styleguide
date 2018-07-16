@@ -1,4 +1,4 @@
-import templates from './common/templates'
+import styleguideProvider from './common/styleguideProvider'
 
 const $ = jQuery || $
 
@@ -8,7 +8,7 @@ if(typeof $ != 'undefined'){
 
     // get options
     const {path, data} = options
-    const tpl = templates.getByPath(path)
+    const tpl = styleguideProvider.getByPath(path)
 
     // Render
     if(!data) this.html(tpl.render(tpl.defaults));

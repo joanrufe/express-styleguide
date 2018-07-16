@@ -1,6 +1,7 @@
+import styleguideProvider from '../common/styleguideProvider'
 import express from 'express'
+
 const app = express()
-import templates from '../common/templates'
 
 app.use(express.static('dist/render-service/'))
 
@@ -13,7 +14,7 @@ app.get('/', function (req, res) {
 // GET -> render with default parameters
 app.get('/render/:page/:component', function (req, res) {
   const {page, component} = req.params
-  const tpl = templates.getByPath(`${page}/${component}`)
+  const tpl = styleguideProvider.getByPath(`${page}/${component}`)
   if (!tpl || tpl.length == 0) {
     res.status(404).send('Not found')
     return
