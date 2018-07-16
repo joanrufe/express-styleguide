@@ -17,7 +17,6 @@ module.exports = function (env) {
 		},
 		
 		// Development settings
-		watch: !env.production? true : false,
 		devServer: !env.production? {
 			hot: true,
 			contentBase: path.resolve(__dirname, 'dist/styleguide/'),
@@ -68,7 +67,7 @@ module.exports = function (env) {
 			]
 		},
 		// devtool: 'inline-source-map',
-		// devtool: 'source-map'
+		devtool: 'source-map',
 		node: {
 			fs: 'empty'
 		}
