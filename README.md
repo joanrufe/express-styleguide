@@ -1,75 +1,82 @@
-# Vanilla javascript live styleguide #
-Boilerplate to be use as a starter styleguide.
-
-## Instalation ##
-Go into the project folder and execute `npm install`
+# Isomorphic javascript components #
+Simple template system built on the top of EJS. You can use it as boilerplate to build living styleguide.
 
 ## Features ##
-This project have following features enabled as default:
-- Node/ExpresJS server for styleguide navigation
-- EJS template system
-- Webpack to bundle the app
-- PostCSS with CSSNext
-- Babel that transpile ES6 to support older browsers 
+The following features are enabled by default:
+- Node [ExpressJS](http://expressjs.com/es/) server for styleguide navigation
+- [EJS](http://ejs.co/) template system
+- [Webpack](https://webpack.js.org/) to bundle the app
+- PostCSS that provides CSS autoprefix and [CSSNext](http://cssnext.io/features/) support
+- [Babel](https://babeljs.io/) to transpile ES6 for older browsers  support 
 - Build your styleguide as a jQuery plugin (jQuery not included)
 
+
+## Instalation ##
+Open a terminal, move into the project folder and execute `npm install`
+
 ## Usage ##
-To manage the deployment process and launch the different features you have run following npm scripts:
+The following scripts will help you manage the deployment process and launch the services provided:
 - To start styleguide development use `npm run develop`
 - To do a build for development purposes use `npm run build`
 - To do a production build use `npm run build:prod`
-- To start the server use `npm run server`. 
+- To start the styleguide server use `npm run server`
 - To start render service use `npm run render-service`
 
+## jQuery plugin usage ##
+To append a rendered component to a jQuery selector use:
 ```js
 $('body').styleguide({
   path: 'atoms/text-input'
   options: { /*.. Options Object ..*/ }
 })
 ```
-If any of the options are not defined it will use defaults.
+If any of the options are not defined the defaults will be used.
+
+## Render service API ##
+Running `npm run render-service` will wake up an express server in [http://localhost:5000/](http://localhost:5000/). 
+
+Use the endpoint */render/* to fetch any component. Eg: [http://localhost:5000/render/atoms/text-input/](http://localhost:5000/render/atoms/text-input/)
 
 ## Add new components into styleguide ##
-If you want to add a component into an existing page (eg: component inside atoms page) follow next steps:
-1. Create *component.ejs* file that should contain a valid EJS template. 
-2. Create *component.js* file will export an object that contain the whole component. This object should have at least three *name*, *render* and *defaults*. Check example: 
+If you want to add a component (eg: newComponent inside myPage) follow next steps:
+1. Create `src/client/common/styleguideProvider/myPage/newComponent.ejs` file that must contain a valid EJS template. 
+2. In the same folder, create `src/client/common/styleguideProvider/myPage/newComponent.js` file and export an object that have at least these properties **name**, **render** and **defaults**. Check example: 
 ```js
-import componentRender from './component.ejs'
-{
+import newComponentRender from './newComponent.ejs'
+
+export default {
   name: 'component',
-  render: componentRender,
-  defaults: {}
+  render: newComponentRender,
+  defaults: {
+    // Optional - default variables for ejs template
+  }
 }
 ```
-4. Edit *src/common/templates/atoms/index.js* to import the component and add it to the list of :
+3. Edit `src/common/styleguideProvider/templates/myPage/index.js`, import the component and add it to the array of components contained in *myPage*:
 ```js
-import component from './text-input.js'
+import newComponent from './newComponent.js'
 
-const atoms = [
-  // ...
-  component
-].map( elem => ({page: 'atoms', ...elem}) )
+const myPage = [
+  // ...other components
+  newComponent
+].map( elem => ({page: 'myPage', ...elem}) )
+
+export myPage
 ```
-1. If you are creating a new page you should repeat the same steps as above to add a component and register the page as follows *src/common/templates/index.js* (eg: newPage):
+4. If you are creating a new page you have to register it by editing `src/common/common/styleguideProvider/templates/index.js`:
 ```js
 import newPage from './newPage'; // Don't forget to import
 
-// ------- Add here new pages here components -------- //
+// Register here new pages
 const all = [
   page,
   ...atoms,
   ...molecules,
-  ...newPage, // Spread all components contained in newPage
+  ...newPage, // Spread the newPage components
 ]
-// ---------------------------------------------------- //
 ```
-You should create a index.js file into the newpage with same structure as describe under point 3.
+Remember to create a index.js file into the newpage with same structure described under point 3.
 
-With this features you achieve a delivery workflow like:
+
+### Component delivery ###
 ![Delivery Workflow](./delivery-workflow.png)
-
-## TODO ##
-- Finish server side rendering Service
-- Optimise production builds
-- Adapt scripts and webpack config for a better dev workflow
-- Dinamically fetch styles when using jQuery Plugin
